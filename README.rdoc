@@ -1,0 +1,3 @@
+= private_wiki
+
+Adds ability to mark wiki pages as private
