@@ -1,3 +1,13 @@
-= private_wiki
+= Private Wiki
 
-Adds ability to mark wiki pages as private
+Plugin for Redmine project.
+Adds ability to mark wiki pages as private (like "private issue" functionality, but for wiki pages)
+
+*Installation* *notes*
+
+I'm not sure about compatibility with redmine versions earlier than 1.3. Maybe it works, maybe not.
+
+- Copy files to vendor/plugins/redmine_private_wiki
+- run rake db:migrate_plugins
+
+Feel free to report bugs or send suggestions!
