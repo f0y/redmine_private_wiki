@@ -8,26 +8,10 @@
     <% end %>
 
     <script type="text/javascript">
-        $$('.contextual')[0].insert({top:$$('span.private')[0]})
+        $$('div.wiki.wiki-page h1')[0].insert({top:$$('span.private')[0]})
         $$('.contextual')[0].insert({bottom:$$('.icon-reveal')[0]})
         $$('.contextual')[0].insert({bottom:$$('.icon-hide')[0]})
     </script>
-<% end %>
-
-
-
-
-<% if controller and controller.class.name == 'ProjectsController' and controller.action_name == "settings" %>
-
-    <p id="private_wiki">
-        <label for="private_wiki_enabled">Is private wiki enabled?</label>
-        <input id="private_wiki_enabled" name="wiki[private_wiki_enabled]" type="checkbox" value="1">
-    </p>
-
-    <script type="text/javascript">
-        $$('#tab-content-wiki .box.tabular')[0].insert({bottom:$$('#private_wiki')[0]})
-    </script>
-
 <% end %>
 
 
