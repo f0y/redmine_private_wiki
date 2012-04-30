@@ -1,0 +1,25 @@
+language: ruby
+rvm:
+  - 1.9.3
+#  - 1.8.7
+#  - 1.9.2
+
+#Prevents installation of plugin's gemfile
+gemfile: non-existent-gemfile
+
+before_install:
+  # Git repo of the ChiliProject/Redmine
+  - export MAIN_REPO="git://github.com/jnv/chiliproject-fit.git"
+  # Name of your plugin's repo
+  - export REPO_NAME=chiliproject_private_wiki
+  # Plugin's name/directory
+  - export PLUGIN_NAME=$REPO_NAME
+  # Arguments passed to bundle install on ChiliProject's Gemfile
+  - export BUNDLE_ARGS="--without development sqlite rmagick ldap openid"
+  - export TARGET_DIR="$HOME/chiliproject"
+before_script: "./test/ci/before_script.sh"
+script: "./test/ci/script.sh"
+
+env:
+  - DB=mysql
+  - DB=postgres
