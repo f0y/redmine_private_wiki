@@ -1,15 +1,12 @@
+# -*- encoding : utf-8 -*-
 require 'redmine'
-require 'private_wiki/hook'
-require 'private_wiki/wiki_patch'
-require 'private_wiki/wiki_controller_patch'
-
 require 'dispatcher'
-Dispatcher.to_prepare :redmine_private_wiki do
-  unless Wiki.included_modules.include? PrivateWiki::WikiPatch
-    Wiki.send(:include, PrivateWiki::WikiPatch)
+Dispatcher.to_prepare :chiliproject_private_wiki do
+  unless Wiki.included_modules.include? PrivateWiki::WikiPagePatch
+    Wiki.send(:include, PrivateWiki::WikiPagePatch)
   end
-  unless WikiPage.included_modules.include? PrivateWiki::WikiPatch
-    WikiPage.send(:include, PrivateWiki::WikiPatch)
+  unless WikiPage.included_modules.include? PrivateWiki::WikiPagePatch
+    WikiPage.send(:include, PrivateWiki::WikiPagePatch)
   end
 
   unless WikiController.included_modules.include? PrivateWiki::WikiControllerPatch
@@ -17,11 +14,12 @@ Dispatcher.to_prepare :redmine_private_wiki do
   end
 end
 
-Redmine::Plugin.register :redmine_private_wiki do
+Redmine::Plugin.register :chiliproject_private_wiki do
   name 'Private Wiki'
   author 'Oleg Kandaurov'
-  description 'Adds private pages to wiki'
+  description 'Allows wiki pages to be set as private'
   version '0.0.1'
+  url 'https://github.com/jnv/chiliproject_private_wiki'
   author_url 'http://okandaurov.info'
 
   project_module :wiki do
