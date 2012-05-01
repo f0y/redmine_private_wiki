@@ -8,6 +8,7 @@ module PrivateWiki
         alias_method_chain :show, :private_wiki
         alias_method_chain :edit, :private_wiki
         alias_method_chain :update, :private_wiki
+        alias_method_chain :load_pages_for_index, :private_wiki
       end
     end
 
@@ -47,6 +48,15 @@ module PrivateWiki
         else
           true
         end
+      end
+
+      # XXX breaks call chain
+      def load_pages_for_index_with_private_wiki
+        scope = @wiki.pages
+        unless User.current.allowed_to?(:view_private_wiki_pages, @project)
+          scope = scope.nonprivate_only
+        end
+        @pages = scope.with_updated_on.all(:order => 'title', :include => {:wiki => :project})
       end
     end
   end

@@ -87,5 +87,37 @@ class WikiControllerTest < ActionController::TestCase
 
     end
 
+    context "#load_pages_for_index" do
+
+      subject { assigns(:pages) }
+
+      context "without view permission" do
+        setup do
+          get :index, :project_id => @project
+        end
+
+        should_respond_with :success
+        should_assign_to :pages
+        should "not assign private page" do
+          assert_not_include subject, @page
+        end
+      end
+
+      context "with view permission" do
+        setup do
+          Role.find(1).add_permission! :view_private_wiki_pages
+          get :index, :project_id => @project
+        end
+
+        should_respond_with :success
+        should_assign_to :pages
+        should "assign private page" do
+          assert_include subject, @page
+        end
+      end
+
+
+    end
+
   end
 end
