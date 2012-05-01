@@ -12,15 +12,16 @@ module PrivateWiki
 
     module InstanceMethods
 
-      def is_private_page_visible?(project, user)
+      def private_page_visible?(project, user)
         !user.nil? && user.allowed_to?(:view_private_wiki_pages, project)
       end
 
       def visible_with_private_wiki?(user=User.current)
-        if self.private and !is_private_page_visible?(@project, user)
-          return false
+        allowed = visible_without_private_wiki?(user)
+        if allowed and self.private
+          return private_page_visible?(project, user)
         end
-        visible_without_private_wiki?(user)
+        allowed
       end
 
     end

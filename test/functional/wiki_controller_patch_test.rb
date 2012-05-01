@@ -12,36 +12,44 @@ class WikiControllerTest < ActionController::TestCase
     setup do
       @project = Project.find(1)
       @request.session[:user_id] = 2
-      @page = @project.wiki.find_page('Another_page')
+      @wiki = @project.wiki
+      @page = @wiki.find_page('Another_page')
+      @page.private = true
+      @page.save!
     end
 
-    context "#authorize_private_page" do
-      setup do
-        @page.private = true
-        @page.save!
-      end
+    context "GET show" do
 
       context "without permission" do
-
+        setup do
+          get :show, :project_id => @project, :id => @page.title
+        end
+        should_respond_with 403
       end
 
       context "with permission" do
-        Role.find(1).add_permission! :manage_project_roles
+        setup do
+          Role.find(1).add_permission! :view_private_wiki_pages
+          get :show, :project_id => @project, :id => @page.title
+        end
+        should_respond_with :success
+      end
+
+      context "public subpage" do
+        setup do
+          @subpage = @page.children.generate!(:wiki => @wiki) do |page|
+            page.private = false
+          end
+          get :show, :project_id => @project, :id => @subpage.title
+        end
+        should_respond_with 403
       end
 
     end
 
-    #context "GET show" do
-    #  setup do
-    #    get :show
-    #  end
-    #
-    #  should "not include local roles" do
-    #    assert_include assigns(:roles), @global_role
-    #    assert_not_include assigns(:roles), @local_role
-    #  end
-    #end
+    context "#authorize_private_page" do
 
+    end
 
   end
 

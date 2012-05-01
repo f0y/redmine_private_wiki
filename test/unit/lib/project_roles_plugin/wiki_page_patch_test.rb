@@ -4,7 +4,7 @@ require File.expand_path('../../../../test_helper', __FILE__)
 require_dependency 'wiki_page'
 class ProjectRolesPlugin::WikiPagePatchTest < ActiveSupport::TestCase
 
-  subject { WikiPage }
+  subject { WikiPage.new }
 
   # Based on WikiPageDropTest
   def setup
@@ -27,9 +27,14 @@ class ProjectRolesPlugin::WikiPagePatchTest < ActiveSupport::TestCase
     end
 
     should "be visible with permission" do
-      @role.add_permission! = :view_private_wiki_pages
+      @role.add_permission! :view_private_wiki_pages
+      User.current.reload
 
       assert @wiki_page.visible?
+    end
+
+    should_eventually "respect private pages in upper hierarchy" do
+
     end
 
   end
