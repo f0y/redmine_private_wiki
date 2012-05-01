@@ -2,14 +2,15 @@
 
 [![Build Status](https://secure.travis-ci.org/jnv/chiliproject_private_wiki.png?branch=master)](http://travis-ci.org/jnv/chiliproject_private_wiki)
 
-Allows wiki pages to be set as private. Private pages are visible only by roles with "View private wiki pages" permission.
+Allows individual wiki pages to be set as private. Private pages are visible only to roles with "View private wiki pages" permission.
 
 ## Modifications in this fork
 
 Plugin is based on [Redmine Private Wiki](https://github.com/f0y/redmine_private_wiki) by Oleg Kandaurov.
+
 The main goal of this fork is to provide ChiliProject compatibility and test coverage.
 
-- Privacy is checked for page's ancestor. If parent page is private, all its descendants will be considered as private too.
+- Privacy is checked for page's ancestors. If a parent page is private, all its descendants will be considered private too.
 - Uses jQuery instead of Prototype.
 
 ## Installation
@@ -26,7 +27,7 @@ Plugin was tested with ChiliProject 3.1.0 and Ruby 1.9.3.
 
 Patches, pull requests and forks are welcome, but if possible, provide proper test coverage.
 
-Test suite uses [Shoulda](https://github.com/thoughtbot/shoulda/tree/v2.10.3) and [Object Daddy](https://github.com/edavis10/object_daddy).
+Test suite uses [Shoulda](https://github.com/thoughtbot/shoulda/tree/v2.10.3).
 
 To run tests, follow [Redmine's instructions](http://www.redmine.org/projects/redmine/wiki/Plugin_Tutorial#Initialize-Test-DB).
 
