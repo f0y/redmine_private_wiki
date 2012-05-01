@@ -39,6 +39,7 @@ class WikiControllerTest < ActionController::TestCase
         setup do
           @subpage = @page.children.generate!(:wiki => @wiki) do |page|
             page.private = false
+            page.content = WikiContent.new(:text => 'text')
           end
           get :show, :project_id => @project, :id => @subpage.title
         end

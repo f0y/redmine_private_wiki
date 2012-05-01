@@ -20,6 +20,11 @@ class ProjectRolesPlugin::WikiPagePatchTest < ActiveSupport::TestCase
 
   should_not_allow_mass_assignment_of :private
 
+  should_eventually "initialize privacy from parent" do
+    new_page = @wiki_page.children.new
+    assert new_page.private
+  end
+
   context "#visible?" do
     should "not be visible without permission" do
       assert @wiki_page.private
@@ -33,8 +38,11 @@ class ProjectRolesPlugin::WikiPagePatchTest < ActiveSupport::TestCase
       assert @wiki_page.visible?
     end
 
-    should_eventually "respect private pages in upper hierarchy" do
-
+    should "respect private pages in upper hierarchy" do
+      @subpage = @wiki_page.children.generate!(:wiki => @wiki) do |page|
+        page.private = false
+      end
+      assert !@wiki_page.visible?
     end
 
   end
