@@ -1,4 +1,4 @@
-<% if controller and controller.class.name == 'WikiController' and controller.action_name == "show" and @page.id %>
+<% if controller and controller.class.name == 'WikiController' and controller.action_name == "show" and @page and @page.id %>
 
     <span id="private-wiki-change-privacy">
     <% if @page.private? %>
