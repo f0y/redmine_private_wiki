@@ -1,6 +1,6 @@
 <% if controller and controller.class.name == 'WikiController' and controller.action_name == "show" and @page and @page.id %>
 
-    <span id="private-wiki-change-privacy">
+    <span id="private_wiki_change_privacy">
     <% if @page.private? %>
         <%= link_to_if_authorized(l(:button_reveal_wiki),
                                   {:action => 'change_privacy', :id => @page.title, :private => 0},
@@ -15,15 +15,11 @@
     <% end %>
     </span>
 
-    <% if @page.private_with_ancestors %>
-        <span class="private"><% l :label_private %></span>
-    <% end %>
-
     <script type="text/javascript">
         <% if @page.private_with_ancestors %>
-        jQuery('#content .wiki h1:first a').before('<span class="private"><%= l :label_private_page %></span>');
+        jQuery('#content .wiki h1').prepend('<span class="private"><%= l :label_private_page %></span>');
         <% end %>
 
-        jQuery('#content .contextual:first').append(jQuery('#private-wiki-change-privacy'))
+        jQuery('#content .contextual:first').append(jQuery('#private_wiki_change_privacy'))
     </script>
 <% end %>
