@@ -49,10 +49,17 @@ class WikiControllerTest < ActionController::TestCase
     end
 
     context "#authorize_private_page" do
+      {:rename => :get, :edit => :get, :update => :put, :protect => :post, :history => :get,
+       :diff => :get, :annotate => :get, :add_attachment => :post, :destroy => :delete}.each do |action, verb|
+        context "#{verb.to_s.upcase} #{action}" do
+          setup do
+            self.send verb, action, :project_id => @project, :id => @page.title
+          end
+          should_respond_with 403 # access denied
+        end
+      end
 
     end
 
   end
-
-
 end
