@@ -1,10 +1,12 @@
 # -*- encoding : utf-8 -*-
 require 'redmine'
 require 'dispatcher'
+require_dependency 'private_wiki/hook'
+
 Dispatcher.to_prepare :chiliproject_private_wiki do
-  unless Wiki.included_modules.include? PrivateWiki::WikiPagePatch
-    Wiki.send(:include, PrivateWiki::WikiPagePatch)
-  end
+  #unless Wiki.included_modules.include? PrivateWiki::WikiPagePatch
+  #  Wiki.send(:include, PrivateWiki::WikiPagePatch)
+  #end
   unless WikiPage.included_modules.include? PrivateWiki::WikiPagePatch
     WikiPage.send(:include, PrivateWiki::WikiPagePatch)
   end

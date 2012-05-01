@@ -6,7 +6,7 @@
     background-image: url(../images/reveal.png);
 }
 
-div.wiki.wiki-page h1 span.private {
+#content .wiki h1 span.private {
     position: relative;
     bottom: 2px;
     text-transform: uppercase;
@@ -15,7 +15,7 @@ div.wiki.wiki-page h1 span.private {
     font-weight: bold;
     padding: 0px 2px 0px 2px;
     font-size: 60%;
-    margin-right: 2px;
+    margin: 0 2px 0 5px;
     border-radius: 2px;
     -moz-border-radius: 2px;
 }

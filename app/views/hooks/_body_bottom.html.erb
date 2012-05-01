@@ -1,18 +1,29 @@
 <% if controller and controller.class.name == 'WikiController' and controller.action_name == "show" and @page.id %>
 
-    <%= link_to_if_authorized(l(:button_hide_wiki), {:action => 'change_privacy', :id => @page.title, :private => 1}, :method => :post, :class => 'icon icon-hide') if !@page.private? %>
-    <%= link_to_if_authorized(l(:button_reveal_wiki), {:action => 'change_privacy', :id => @page.title, :private => 0}, :method => :post, :class => 'icon icon-reveal') if @page.private? %>
-
+    <span id="private-wiki-change-privacy">
     <% if @page.private? %>
-        <span class="private">Private</span>
+        <%= link_to_if_authorized(l(:button_reveal_wiki),
+                                  {:action => 'change_privacy', :id => @page.title, :private => 0},
+                                  :method => :post,
+                                  :class => 'icon icon-reveal', :id => 'change_privacy') %>
+
+    <% else %>
+        <%= link_to_if_authorized(l(:button_hide_wiki),
+                                  {:action => 'change_privacy', :id => @page.title, :private => 1},
+                                  :method => :post,
+                                  :class => 'icon icon-hide', :id => 'change_privacy') if !@page.private? %>
+    <% end %>
+    </span>
+
+    <% if @page.private_with_ancestors %>
+        <span class="private"><% l :label_private %></span>
     <% end %>
 
     <script type="text/javascript">
-        $$('div.wiki.wiki-page h1')[0].insert({top:$$('span.private')[0]})
-        $$('.contextual')[0].insert({bottom:$$('.icon-reveal')[0]})
-        $$('.contextual')[0].insert({bottom:$$('.icon-hide')[0]})
+        <% if @page.private_with_ancestors %>
+        jQuery('#content .wiki h1:first a').before('<span class="private"><%= l :label_private_page %></span>');
+        <% end %>
+
+        jQuery('#content .contextual:first').append(jQuery('#private-wiki-change-privacy'))
     </script>
 <% end %>
-
-
-
