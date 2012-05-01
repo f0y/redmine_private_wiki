@@ -44,7 +44,7 @@ module PrivateWiki
       private
       def authorize_private_page
         if @page.private_with_ancestors and !@page.private_page_visible?(@project, User.current)
-          render_403
+          deny_access
         else
           true
         end
