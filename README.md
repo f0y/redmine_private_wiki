@@ -9,15 +9,14 @@ Allows wiki pages to be set as private. Private pages are visible only by roles 
 Plugin is based on [Redmine Private Wiki](https://github.com/f0y/redmine_private_wiki) by Oleg Kandaurov.
 The main goal of this fork is to provide ChiliProject compatibility and test coverage.
 
+- Privacy is checked for page's ancestor. If parent page is private, all its descendants will be considered as private too.
+- Uses jQuery instead of Prototype.
+
 ## Installation
 
 1. Follow the instructions at https://www.chiliproject.org/projects/chiliproject/wiki/Plugin_Install
 2. Two new permissions will be available for roles: View private wiki pages and Manage private wiki pages (to manage privacy of the page)
-3. Page can be set as private using
-
-## Dependencies
-
-Plugin depends on the [MembersView](https://github.com/jnv/chiliproject_members_view) gem. It will be picked by `bundle install`.
+3. Page can be changed to private using the contextual links on the wiki page
 
 ## Compatibility
 
@@ -37,4 +36,4 @@ You can also use [Travis-CI](http://travis-ci.org/) integration based on the [ch
 
 ## License
 
-This plugin is licensed under the GNU GPL v2. See COPYRIGHT.txt and LICENSE.txt for details.
+This plugin is licensed under the MIT license.
