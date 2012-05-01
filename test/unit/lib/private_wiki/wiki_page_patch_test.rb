@@ -2,7 +2,7 @@
 require File.expand_path('../../../../test_helper', __FILE__)
 
 require_dependency 'wiki_page'
-class ProjectRolesPlugin::WikiPagePatchTest < ActiveSupport::TestCase
+class PrivateWiki::WikiPagePatchTest < ActiveSupport::TestCase
 
   subject { WikiPage.new }
 
