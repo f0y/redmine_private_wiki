@@ -19,7 +19,6 @@ class WikiControllerTest < ActionController::TestCase
     end
 
     context "GET show" do
-
       context "without permission" do
         setup do
           get :show, :project_id => @project, :id => @page.title
@@ -44,6 +43,33 @@ class WikiControllerTest < ActionController::TestCase
           get :show, :project_id => @project, :id => @subpage.title
         end
         should_respond_with 403
+      end
+    end
+
+    context "POST change privacy" do
+      setup do
+        Role.find(1).add_permission! :view_private_wiki_pages
+      end
+
+      context "without permission" do
+        setup do
+          post :change_privacy, :project_id => @project, :id => @page.title, :private => 0
+        end
+        should_respond_with 403
+      end
+
+      context "with permission" do
+        setup do
+          assert @page.private
+          Role.find(1).add_permission! :manage_private_wiki_pages
+          post :change_privacy, :project_id => @project, :id => @page.title, :private => 0
+        end
+
+        should_redirect_to("project_wiki") { project_wiki_path(@project, @page.title) }
+
+        should "change page's privacy" do
+          assert !@page.reload.private
+        end
       end
 
     end
