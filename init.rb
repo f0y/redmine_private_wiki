@@ -7,10 +7,12 @@ Dispatcher.to_prepare :chiliproject_private_wiki do
   #unless Wiki.included_modules.include? PrivateWiki::WikiPagePatch
   #  Wiki.send(:include, PrivateWiki::WikiPagePatch)
   #end
+  require_dependency 'wiki_page'
   unless WikiPage.included_modules.include? PrivateWiki::WikiPagePatch
     WikiPage.send(:include, PrivateWiki::WikiPagePatch)
   end
 
+  require_dependency 'wiki_controller'
   unless WikiController.included_modules.include? PrivateWiki::WikiControllerPatch
     WikiController.send(:include, PrivateWiki::WikiControllerPatch)
   end
