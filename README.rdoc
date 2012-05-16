@@ -5,8 +5,7 @@ Allows individual wiki pages to be set as private. Private pages are visible onl
 == ChiliProject
 
 If you are using ChiliProject you must take a look at plugin https://github.com/jnv/chiliproject_private_wiki by Jan Vlnas
-which is a fork of current plugin. ChiliProject plugin offers different functionality. If you use Redmine and want some
-of its features, please let me know.
+which is a fork of current plugin. ChiliProject plugin offers different functionality. If you want some of its features, please let me know.
 
 == Installation
 
