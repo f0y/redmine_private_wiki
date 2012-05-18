@@ -15,7 +15,7 @@ module PrivateWiki
       end
 
       def visible_with_private_wiki?(user)
-        if self.private and !is_private_page_visible?(@project)
+        if self.private and !is_private_page_visible?(project)
           return false
         end
         visible_without_private_wiki?
