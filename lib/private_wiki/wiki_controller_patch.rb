@@ -12,7 +12,7 @@ module PrivateWiki
 
       def show_with_private_wiki
         if @page.private and !@page.is_private_page_visible?(@project)
-          return render_403
+          return deny_access
         end
         show_without_private_wiki
       end
