@@ -10,7 +10,7 @@ which is a fork of current plugin. ChiliProject plugin offers different function
 == Installation
 
     cd /home/user/path_to_you_app/
-    git clone git clone git@github.com:f0y/redmine_private_wiki.git -b redmine-2.0 plugins/redmine_private_wiki -b redmine-2.0 plugins/redmine_private_wiki
+    git clone git://github.com/f0y/redmine_private_wiki.git -b redmine-2.0 plugins/redmine_private_wiki
     rake redmine:plugins:migrate RAILS_ENV=production
 
 In addition you can read instructions on http://www.redmine.org/projects/redmine/wiki/Plugins
