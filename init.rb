@@ -1,16 +1,14 @@
-require 'redmine'
-require 'private_wiki/hook'
-require 'private_wiki/wiki_patch'
-require 'private_wiki/wiki_controller_patch'
+require'redmine'
+require_dependency 'private_wiki/hook'
 
 Rails.configuration.to_prepare do
-  unless Wiki.included_modules.include? PrivateWiki::WikiPatch
-    Wiki.send(:include, PrivateWiki::WikiPatch)
-  end
-  unless WikiPage.included_modules.include? PrivateWiki::WikiPatch
-    WikiPage.send(:include, PrivateWiki::WikiPatch)
+
+  require_dependency 'wiki_page'
+  unless WikiPage.included_modules.include? PrivateWiki::WikiPagePatch
+    WikiPage.send(:include, PrivateWiki::WikiPagePatch)
   end
 
+  require_dependency 'wiki_controller'
   unless WikiController.included_modules.include? PrivateWiki::WikiControllerPatch
     WikiController.send(:include, PrivateWiki::WikiControllerPatch)
   end
