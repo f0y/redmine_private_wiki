@@ -22,23 +22,23 @@ class WikiControllerPatchTest < ActionController::TestCase
       @page.save!
     end
 
-    #context "GET show" do
-    #  context "without permission" do
-    #    setup do
-    #      get :show, :project_id => @project, :id => @page.title
-    #    end
-    #    should_respond_with 403
-    #  end
-    #
-    #  context "with permission" do
-    #    setup do
-    #      Role.find(1).add_permission! :view_private_wiki_pages
-    #      get :show, :project_id => @project, :id => @page.title
-    #    end
-    #    should_respond_with :success
-    #  end
-    #
-    #end
+    context "GET show" do
+      context "without permission" do
+        setup do
+          get :show, :project_id => @project, :id => @page.title
+        end
+        should_respond_with 403
+      end
+
+      context "with permission" do
+        setup do
+          Role.find(1).add_permission! :view_private_wiki_pages
+          get :show, :project_id => @project, :id => @page.title
+        end
+        should_respond_with :success
+      end
+
+    end
 
     context "POST change privacy" do
       setup do
@@ -68,50 +68,50 @@ class WikiControllerPatchTest < ActionController::TestCase
 
     end
 
-    #context "#authorize_private_page" do
-    #  {:rename => :get, :edit => :get, :update => :put, :protect => :post, :history => :get,
-    #   :diff => :get, :annotate => :get, :add_attachment => :post, :destroy => :delete}.each do |action, verb|
-    #    context "#{verb.to_s.upcase} #{action}" do
-    #      setup do
-    #        self.send verb, action, :project_id => @project, :id => @page.title
-    #      end
-    #      should respond_with 403 # access denied
-    #    end
-    #  end
-    #
-    #end
+    context "#authorize_private_page" do
+      {:rename => :get, :edit => :get, :update => :put, :protect => :post, :history => :get,
+       :diff => :get, :annotate => :get, :add_attachment => :post, :destroy => :delete}.each do |action, verb|
+        context "#{verb.to_s.upcase} #{action}" do
+          setup do
+            self.send verb, action, :project_id => @project, :id => @page.title, :version => 1
+          end
+          should respond_with 403
+        end
+      end
 
-    #context "#load_pages_for_index" do
-    #
-    #  subject { assigns(:pages) }
-    #
-    #  context "without view permission" do
-    #    setup do
-    #      get :index, :project_id => @project
-    #    end
-    #
-    #    should respond_with :success
-    #    should assign_to :pages
-    #    should "not assign private page" do
-    #      assert_not_include subject, @page
-    #    end
-    #  end
-    #
-    #  context "with view permission" do
-    #    setup do
-    #      Role.find(1).add_permission! :view_private_wiki_pages
-    #      get :index, :project_id => @project
-    #    end
-    #
-    #    should respond_with :success
-    #    should assign_to :pages
-    #    should "assign private page" do
-    #      assert_include subject, @page
-    #    end
-    #  end
-    #
-    #
-    #end
+    end
+
+    context "#load_pages_for_index" do
+
+      subject { assigns(:pages) }
+
+      context "without view permission" do
+        setup do
+          get :index, :project_id => @project
+        end
+
+        should respond_with :success
+        should assign_to :pages
+        should "not assign private page" do
+          assert_not_include subject, @page
+        end
+      end
+
+      context "with view permission" do
+        setup do
+          Role.find(1).add_permission! :view_private_wiki_pages
+          get :index, :project_id => @project
+        end
+
+        should respond_with :success
+        should assign_to :pages
+        should "assign private page" do
+          assert_include subject, @page
+        end
+      end
+
+
+    end
 
   end
 end

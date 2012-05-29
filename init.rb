@@ -1,4 +1,4 @@
-require'redmine'
+require 'redmine'
 require_dependency 'private_wiki/hook'
 
 Rails.configuration.to_prepare do
@@ -18,7 +18,7 @@ Redmine::Plugin.register :redmine_private_wiki do
   name 'Private Wiki'
   author 'Oleg Kandaurov'
   description 'Adds private pages to wiki'
-  version '0.3'
+  version '0.1'
   author_url 'http://okandaurov.info'
   requires_redmine :version_or_higher => '2.0.0'
 
