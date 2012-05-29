@@ -26,7 +26,7 @@ module PrivateWiki
       end
 
       def update_with_private_wiki
-        @page = @wiki.find_page(params[:id])
+        find_existing_or_new_page
         if @page
           success = authorize_private_page
           return false unless success
@@ -43,21 +43,13 @@ module PrivateWiki
       private
       def authorize_private_page
         if @page.private and !@page.private_page_visible?(@project, User.current)
-          self.response_body = nil
+          self.response_body = nil  #Prevent double render error
           deny_access
         else
           true
         end
       end
 
-      ## XXX breaks call chain
-      #def load_pages_for_index_with_private_wiki
-      #  scope = @wiki.pages
-      #  unless User.current.allowed_to?(:view_private_wiki_pages, @project)
-      #    scope = scope.nonprivate_only
-      #  end
-      #  @pages = scope.with_updated_on.all(:order => 'title', :include => {:wiki => :project})
-      #end
     end
   end
 end
