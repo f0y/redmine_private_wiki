@@ -1,10 +1,8 @@
 require 'redmine'
 require 'private_wiki/hook'
 
-<<<<<<< HEAD
 require 'dispatcher'
 Dispatcher.to_prepare :redmine_private_wiki do
-
   unless WikiPage.included_modules.include? PrivateWiki::WikiPagePatch
     WikiPage.send(:include, PrivateWiki::WikiPagePatch)
   end

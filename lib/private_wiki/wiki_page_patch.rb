@@ -6,6 +6,7 @@ module PrivateWiki
         unloadable
         attr_protected :private
         alias_method_chain :visible?, :private_wiki
+        #named_scope :nonprivate_only, :conditions => {:private => false}
       end
     end
 
