@@ -2,17 +2,23 @@
 require File.expand_path('../../test_helper', __FILE__)
 
 # Re-raise errors caught by the controller.
-class WikiController; def rescue_action(e) raise e end; end
+class WikiController;
+  def rescue_action(e)
+    raise e
+  end
+end
 
-class WikiControllerPatchTest < ActionController::TestCase
+require File.expand_path('test/functional/wiki_controller_test', Rails.root)
+
+class WikiControllerPatchTest < WikiControllerTest
 
   fixtures :projects, :users, :roles, :members, :member_roles, :enabled_modules, :wikis, :wiki_pages, :wiki_contents, :journals, :attachments, :enumerations
 
   context "PrivateWikiPlugin" do
     setup do
       @controller = WikiController.new
-      @request    = ActionController::TestRequest.new
-      @response   = ActionController::TestResponse.new
+      @request = ActionController::TestRequest.new
+      @response = ActionController::TestResponse.new
       User.current = nil
       @project = Project.find(1)
       @request.session[:user_id] = 2
@@ -78,38 +84,6 @@ class WikiControllerPatchTest < ActionController::TestCase
           should respond_with 403
         end
       end
-
-    end
-
-    context "#load_pages_for_index" do
-
-      subject { assigns(:pages) }
-
-      context "without view permission" do
-        setup do
-          get :index, :project_id => @project
-        end
-
-        should respond_with :success
-        should assign_to :pages
-        should "not assign private page" do
-          assert_not_include subject, @page
-        end
-      end
-
-      context "with view permission" do
-        setup do
-          Role.find(1).add_permission! :view_private_wiki_pages
-          get :index, :project_id => @project
-        end
-
-        should respond_with :success
-        should assign_to :pages
-        should "assign private page" do
-          assert_include subject, @page
-        end
-      end
-
 
     end
 
