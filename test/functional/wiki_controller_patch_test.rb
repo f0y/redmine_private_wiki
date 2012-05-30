@@ -33,7 +33,12 @@ class WikiControllerPatchTest < WikiControllerTest
         setup do
           get :show, :project_id => @project, :id => @page.title
         end
+
         should_respond_with 403
+
+        should "not contains private label" do
+          assert_no_tag :tag => 'span', :attributes => {:class => 'private'}
+        end
       end
 
       context "with permission" do
@@ -41,7 +46,12 @@ class WikiControllerPatchTest < WikiControllerTest
           Role.find(1).add_permission! :view_private_wiki_pages
           get :show, :project_id => @project, :id => @page.title
         end
+
         should_respond_with :success
+
+        should "contains private label" do
+          assert_tag :tag => 'span', :attributes => {:class => 'private'}
+        end
       end
 
     end

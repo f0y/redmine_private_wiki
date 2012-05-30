@@ -1,4 +1,5 @@
-<% if controller and controller.class.name == 'WikiController' and controller.action_name == "show" and @page and @page.id %>
+<% if controller and controller.class.name == 'WikiController' and controller.action_name == "show" and
+        @page and @page.id and @page.visible? %>
 
     <%= link_to_if_authorized(l(:button_hide_wiki), {:action => 'change_privacy', :id => @page.title, :private => 1}, :method => :post, :class => 'icon icon-hide') if !@page.private? %>
     <%= link_to_if_authorized(l(:button_reveal_wiki), {:action => 'change_privacy', :id => @page.title, :private => 0}, :method => :post, :class => 'icon icon-reveal') if @page.private? %>
