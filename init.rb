@@ -1,17 +1,14 @@
 require 'redmine'
-require 'private_wiki/hook'
-require 'private_wiki/wiki_patch'
-require 'private_wiki/wiki_controller_patch'
+require_dependency 'private_wiki/hook'
 
-require 'dispatcher'
-Dispatcher.to_prepare :redmine_private_wiki do
-  unless Wiki.included_modules.include? PrivateWiki::WikiPatch
-    Wiki.send(:include, PrivateWiki::WikiPatch)
-  end
-  unless WikiPage.included_modules.include? PrivateWiki::WikiPatch
-    WikiPage.send(:include, PrivateWiki::WikiPatch)
+Rails.configuration.to_prepare do
+
+  require_dependency 'wiki_page'
+  unless WikiPage.included_modules.include? PrivateWiki::WikiPagePatch
+    WikiPage.send(:include, PrivateWiki::WikiPagePatch)
   end
 
+  require_dependency 'wiki_controller'
   unless WikiController.included_modules.include? PrivateWiki::WikiControllerPatch
     WikiController.send(:include, PrivateWiki::WikiControllerPatch)
   end
@@ -21,8 +18,9 @@ Redmine::Plugin.register :redmine_private_wiki do
   name 'Private Wiki'
   author 'Oleg Kandaurov'
   description 'Adds private pages to wiki'
-  version '0.0.1'
+  version '0.1'
   author_url 'http://okandaurov.info'
+  requires_redmine :version_or_higher => '2.0.0'
 
   project_module :wiki do
     permission :view_private_wiki_pages, {}

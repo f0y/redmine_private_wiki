@@ -1,4 +1,4 @@
-<% if controller and controller.class.name == 'WikiController' and controller.action_name == "show" %>
+<% if controller and controller.class.name == 'WikiController' and controller.action_name == "show" and @page and @page.id %>
 
     <%= link_to_if_authorized(l(:button_hide_wiki), {:action => 'change_privacy', :id => @page.title, :private => 1}, :method => :post, :class => 'icon icon-hide') if !@page.private? %>
     <%= link_to_if_authorized(l(:button_reveal_wiki), {:action => 'change_privacy', :id => @page.title, :private => 0}, :method => :post, :class => 'icon icon-reveal') if @page.private? %>
@@ -12,22 +12,6 @@
         $$('.contextual')[0].insert({bottom:$$('.icon-reveal')[0]})
         $$('.contextual')[0].insert({bottom:$$('.icon-hide')[0]})
     </script>
-<% end %>
-
-
-
-
-<% if controller and controller.class.name == 'ProjectsController' and controller.action_name == "settings" %>
-
-    <p id="private_wiki">
-        <label for="private_wiki_enabled">Is private wiki enabled?</label>
-        <input id="private_wiki_enabled" name="wiki[private_wiki_enabled]" type="checkbox" value="1">
-    </p>
-
-    <script type="text/javascript">
-        $$('#tab-content-wiki .box.tabular')[0].insert({bottom:$$('#private_wiki')[0]})
-    </script>
-
 <% end %>
 
 

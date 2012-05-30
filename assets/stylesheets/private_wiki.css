@@ -1,12 +1,16 @@
-.icon-hide  { background-image: url(../images/hide.png); }
-.icon-reveal  { background-image: url(../images/reveal.png); }
+.icon-hide {
+    background-image: url(../images/hide.png);
+}
+
+.icon-reveal {
+    background-image: url(../images/reveal.png);
+}
 
 span.private {
     position: relative;
     text-transform: uppercase;
     background: #D22;
     color: white;
-    font-weight: bold;
     padding: 2px 4px 2px 4px;
     margin-right: 10px;
     border-radius: 3px;

@@ -1,3 +1,24 @@
-= private_wiki
+= Private Wiki plugin for Redmine
 
-Adds ability to mark wiki pages as private
+Allows individual wiki pages to be set as private. Private pages are visible only to roles with "View private wiki pages" permission.
+
+== ChiliProject
+
+If you are using ChiliProject you must take a look at plugin https://github.com/jnv/chiliproject_private_wiki by Jan Vlnas
+which is a fork of current plugin. ChiliProject plugin offers different functionality. If you want some of its features, please let me know.
+
+== Installation
+
+    cd /home/user/path_to_you_app/
+    git clone git://github.com/f0y/redmine_private_wiki.git -b redmine-2.0 plugins/redmine_private_wiki
+    rake redmine:plugins:migrate RAILS_ENV=production
+
+In addition you can read instructions on http://www.redmine.org/projects/redmine/wiki/Plugins
+
+== Compatibility
+
+Compatible with Redmine 2.0 and higher
+
+== License
+
+This plugin is licensed under the MIT license.
