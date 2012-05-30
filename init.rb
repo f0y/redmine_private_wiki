@@ -12,6 +12,10 @@ Rails.configuration.to_prepare do
   unless WikiController.included_modules.include? PrivateWiki::WikiControllerPatch
     WikiController.send(:include, PrivateWiki::WikiControllerPatch)
   end
+
+  unless Redmine::WikiFormatting::Macros::Definitions.included_modules.include? PrivateWiki::MacrosPatch
+    Redmine::WikiFormatting::Macros::Definitions.send(:include, PrivateWiki::MacrosPatch)
+  end
 end
 
 Redmine::Plugin.register :redmine_private_wiki do
