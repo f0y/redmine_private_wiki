@@ -43,7 +43,7 @@ module PrivateWiki
       private
       def authorize_private_page
         if @page.private and !@page.private_page_visible?(@project, User.current)
-          self.response_body = nil  #Prevent double render error
+          self.erase_render_results
           deny_access
         else
           true
