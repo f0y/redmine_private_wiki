@@ -10,16 +10,24 @@ which is a fork of current plugin. ChiliProject plugin offers different function
 
 == Compatibility
 
-There are two versions of the plugin:
-    * 0.1.x for Redmine 1.4.x and lower
-    * 0.2.x for Redmine 2.0.x and higher
+There are few versions of the plugin:
+    * redmine-1.4 for Redmine 1.4.x
+    * redmine-2.0 for Redmine 2.0.x
+    * redmine-2.1 for Redmine 2.1.x and higher
 
 == Installation
 
     cd /home/user/path_to_you_app/
-    git clone git://github.com/f0y/redmine_private_wiki.git vendor/plugins/redmine_private_wiki
-    git checkout redmine-private-wiki-0.2.1
-    rake redmine:plugins:migrate RAILS_ENV=production
+    git clone git://github.com/f0y/redmine_private_wiki.git plugins/redmine_private_wiki
+    cd plugins/redmine_private_wiki; git checkout <YOUR BRANCH HERE - see above>
+
+For Redmine 1.4.x
+
+    bundle exec rake db:migrate_plugins RAILS_ENV=production
+
+For Redmine 2.x and higher
+
+    bundle exec rake redmine:plugins:migrate RAILS_ENV=production
 
 Also you can read instructions on http://www.redmine.org/projects/redmine/wiki/Plugins
 
