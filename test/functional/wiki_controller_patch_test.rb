@@ -9,8 +9,6 @@ class WikiController;
 end
 
 require File.expand_path('test/functional/wiki_controller_test', Rails.root)
-require "wiki_controller"
-WikiController.send(:include, PrivateWiki::WikiControllerPatch)
 
 class WikiControllerPatchTest < WikiControllerTest
 
@@ -77,7 +75,7 @@ class WikiControllerPatchTest < WikiControllerTest
           post :change_privacy, :project_id => @project, :id => @page.title, :private => 0
         end
 
-        should_redirect_to("project_wiki") { project_wiki_path(@project, @page.title) }
+        should redirect_to("project_wiki") { project_wiki_path(@project, @page.title) }
 
         should "change page's privacy" do
           assert !@page.reload.private
