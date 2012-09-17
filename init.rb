@@ -20,8 +20,9 @@ Redmine::Plugin.register :redmine_private_wiki do
   name 'Private Wiki'
   author 'Oleg Kandaurov'
   description 'Adds private pages to wiki'
-  version '0.0.1'
-  author_url 'http://okandaurov.info'
+  version '0.1.1'
+  author_url 'http://f0y.me'
+  requires_redmine :version => ['1.4.0', '1.4.1', '1.4.2', '1.4.3', '1.4.4', '1.4.5', '1.4.6', '1.4.7', '1.4.8', '1.4.9']
 
   project_module :wiki do
     permission :view_private_wiki_pages, {}
