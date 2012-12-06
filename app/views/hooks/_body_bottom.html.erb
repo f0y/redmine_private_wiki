@@ -9,9 +9,9 @@
     <% end %>
 
     <script type="text/javascript">
-        $$('.contextual')[0].insert({top:$$('span.private')[0]})
-        $$('.contextual')[0].insert({bottom:$$('.icon-reveal')[0]})
-        $$('.contextual')[0].insert({bottom:$$('.icon-hide')[0]})
+        $('.contextual').prepend($('span.private'));
+        $('.contextual').append($('.icon-reveal'));
+        $('.contextual').append($('.icon-hide'));        
     </script>
 <% end %>
 
