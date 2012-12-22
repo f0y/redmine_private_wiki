@@ -1,0 +1,7 @@
+tr:
+  private_wiki: Özel Wiki
+  permission_view_private_wiki_pages: Özel wiki sayfalarını görme
+  permission_manage_private_wiki_pages: Özel wiki sayfalarını yönetme
+  button_hide_wiki: Özel wiki yap
+  button_reveal_wiki: Genel wiki yap
+  private: ÖZEL
