@@ -1,0 +1,7 @@
+fr:
+  private_wiki: Wiki privé
+  permission_view_private_wiki_pages: Voir les pages wiki privées
+  permission_manage_private_wiki_pages: Gérer les pages wiki privées
+  button_hide_wiki: Rendre privé
+  button_reveal_wiki: Rendre public
+  private: PRIVÉ
