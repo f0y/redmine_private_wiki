@@ -37,7 +37,7 @@ module PrivateWiki
       def change_privacy
         find_existing_page
         @page.update_attribute :private, params[:private]
-        redirect_to project_wiki_path(@project, @page.title)
+        redirect_to project_wiki_page_path(@project, @page.title)
       end
 
       private
