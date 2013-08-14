@@ -15,7 +15,7 @@ which is a fork of current plugin. ChiliProject plugin offers different function
 There are few versions of the plugin:
 * redmine-1.4 for Redmine 1.4.x
 * redmine-2.0 for Redmine 2.0.x
-* redmine-2.1 for Redmine 2.1.x and highe
+* redmine-2.1 for Redmine 2.1.x and higher
 
 ## Installation
 
